@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <title>base</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Producten</h1>
+  <form id="form">
+    <p>
+      <label>Hoeveel pizza's small?</label>
+      <input type="number" name="input_smallpizza" id="input_smallpizza">
+    </p>
+    <p>
+      <label>Hoeveel pizza's Medium?</label>
+      <input type="number" name="input_mediumpizza" id="input_mediumpizza">
+    </p>
+    <p>
+      <label>Hoeveel pizza's Large?</label>
+      <input type="number" name="input_largepizza" id="input_largepizza">
+    </p>
+    <input type="submit" id="submit_button" value="berekenen">
+  </form>
+  <div id="result">
+    <h1>Kassa bon</h1>
+    <p><label>Small pizza </label><span id="display_smallpizza"></span></p>
+    <p><label>Medium pizza</label><span id="display_mediumpizza"></span></p>
+    <p><label>Large pizza </label><span id="display_largepizza"></span></p>
+    <p><label>Totaal</label><span id="display_totaal"></span></p>
+    
+  </div>
+
+  <script>
+    const PRIJS_SMALL = 6.50
+    const PRIJS_MEDIUM = 9.30
+    const PRIJS_LARGE = 11.10
+    function submit(event){ 
+      display_smallpizza.textContent = input_smallpizza.value + '*' + PRIJS_SMALL.toFixed(2) + '=' + (input_smallpizza.value * PRIJS_SMALL).toFixed(2)
+      display_mediumpizza.textContent = input_mediumpizza.value + '*' + PRIJS_MEDIUM.toFixed(2) + '=' + (input_mediumpizza.value * PRIJS_MEDIUM).toFixed(2)
+      display_largepizza.textContent = input_largepizza.value + '*' + PRIJS_LARGE.toFixed(2) + '=' + (input_largepizza.value * PRIJS_LARGE).toFixed(2)
+      display_totaal.textContent = (input_smallpizza.value * PRIJS_SMALL + input_mediumpizza.value * PRIJS_MEDIUM + input_largepizza.value * PRIJS_LARGE).toFixed(2)
+
+
+    }
+    submit_button.addEventListener('click',submit);
+
+    function form_submit(event){
+      event.preventDefault();
+    }
+    form.addEventListener('submit',form_submit)
+
+  </script>
+</body>
+</html>

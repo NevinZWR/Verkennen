@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>test</title>
+</head>
+<body>
+  Aantal: <input type="number" id="amount" value="1"> <span>adviesprijs €1,23 </span><br>
+  Vriendenprijs: <input type="number" step="0.01" id="price" value="1.00"><br>
+
+  <button id="bereken">Bereken</button>
+  <p>Te betalen:</p>
+  <p id="resultaat"></p>
+
+  <script>
+    const ADVIESPRIJS = 1.23; // adviesprijs
+
+    function berekening(event) {
+      let totaal = 0; 
+      let priceValue = document.getElementById("price").value;
+      
+      if (priceValue !== '') { 
+        let newPrice = Number(priceValue);
+        ADVIESPRIJS = newPrice; 
+      } 
+
+      let realPrice = ADVIESPRIJS;
+      let total = realPrice * Number(document.getElementById("amount").value); 
+      document.getElementById("resultaat").textContent = total.toFixed(2);
+    }
+
+    document.getElementById("bereken").addEventListener('click', berekening);
+  </script>
+</body>
+</html>

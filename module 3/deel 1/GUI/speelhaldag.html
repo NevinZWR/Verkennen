@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <title>base</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Producten</h1>
+  <form id="form">
+    <p>
+      <label>Hoeveel Spelers </label>
+      <input type="number" name="input_hoeveelspelers" id="input_hoeveelspelers">
+    </p>
+    <p>
+      <label>Hoeveel Spelers in de VIP </label>
+      <input type="number" name="input_vip" id="input_vip">
+    </p>
+    <p>
+      <label>Hoelang in de VIP </label>
+      <input type="number" name="input_hoelangvip" id="input_hoelangvip">
+    </p>
+    <input type="submit" id="submit_button" value="berekenen">
+  </form>
+  <div id="result">
+    <h1>Kassa bon</h1>
+    <p><label>Hoeveelspelers </label><span id="display_hoeveelspelers"></span></p>
+    <p><label>Prijs pp VIP</label><span id="display_vip"></span></p>
+    <p><label>Hoelang in de VIP </label><span id="display_hoelangvip"></span></p>
+    <p><label>Totaal VIP </label><span id="display_totaalvip"></span></p>
+    <p><label>Totaal </label><span id="display_totaal"></span></p>
+    
+  </div>
+
+  <script>
+    const PRIJS_TOEGANG = 12.45
+    const PERIODE_VIPSEAT = 5
+    const PRIJS_VIPSEAT = 0.65
+    function submit(event){
+      let hoelangvip = input_hoelangvip.value / PERIODE_VIPSEAT
+      display_hoeveelspelers.textContent = input_hoeveelspelers.value + '*' + PRIJS_TOEGANG + '=' + input_hoeveelspelers.value * PRIJS_TOEGANG.toFixed(2)      
+      display_hoelangvip.textContent =  input_hoelangvip.value + '/' + PERIODE_VIPSEAT + '=' + hoelangvip.toFixed(2)
+      display_vip.textContent = input_hoelangvip.value / PERIODE_VIPSEAT + '*' + PRIJS_VIPSEAT + '=' + (input_hoelangvip.value / PERIODE_VIPSEAT * PRIJS_VIPSEAT).toFixed(2)
+      display_totaalvip.textContent = input_vip.value + '*' + (input_hoelangvip.value / PERIODE_VIPSEAT * PRIJS_VIPSEAT).toFixed(2) + '=' + (input_vip.value * input_hoelangvip.value / PERIODE_VIPSEAT * PRIJS_VIPSEAT).toFixed(2)
+      display_totaal.textContent = input_hoeveelspelers.value * PRIJS_TOEGANG + input_vip.value * input_hoelangvip.value / PERIODE_VIPSEAT * PRIJS_VIPSEAT
+    }
+    submit_button.addEventListener('click',submit);
+
+    // prevent document from default trying to really submit
+    function form_submit(event){
+      event.preventDefault();
+    }
+    form.addEventListener('submit',form_submit)
+
+  </script>
+</body>
+</html>
